@@ -1,0 +1,140 @@
+<html lang="en">
+
+<head>
+  
+<meta charset="UTF-8">
+ 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+ 
+<title>My Project Name Here</title>
+
+</head>
+<style>
+  canvas{
+  width:400pt;
+  height:200pt;
+  border:1pt solid lightgray;
+ }
+</style>
+<script src ="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+<script>
+      var image;
+var R, G, B;
+
+var pixel;
+function Upload() {
+  var imagecanvas = document.getElementById("d1");
+  var fileinput = document.getElementById("finput");
+
+  image = new SimpleImage(fileinput);
+  image.drawTo(imagecanvas);
+}
+
+function Rainbow() {
+  var sec = image.getHeight() / 7;
+  var avg;
+
+  for (pixel of image.values()) {
+    avg = (pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3;
+    var y = pixel.getY();
+    if (y <= sec * 1) {
+      if (avg < 128) {
+        R = 2 * avg;
+        G = 0;
+        B = 0;
+      } else {
+        R = 255;
+        G = 2 * avg - 255;
+        B = 2 * avg - 255;
+      }
+    } else if (y <= sec * 2) {
+      if (avg < 128) {
+        R = 2 * avg;
+        G = 0.8 * avg;
+        B = 0;
+      } else {
+        R = 255;
+        G = 1.2 * avg - 51;
+        B = 2 * avg - 255;
+      }
+    } else if (y <= sec * 3) {
+      if (avg < 128) {
+        R = 2 * avg;
+        G = 2 * avg;
+        B = 0;
+      } else {
+        R = 255;
+        G = 255;
+        B = 2 * avg - 255;
+      }
+    } else if (y <= sec * 4) {
+      if (avg < 128) {
+        R = 0;
+        G = 2 * avg;
+        B = 0;
+      } else {
+        R = 2 * avg - 255;
+        G = 255;
+        B = 2 * avg - 255;
+      }
+    } else if (y <= sec * 5) {
+      if (avg < 128) {
+        R = 0;
+        G = 0;
+        B = 2 * avg;
+      } else {
+        R = 2 * avg - 255;
+        G = 2 * avg - 255;
+        B = 255;
+      }
+    } else if (y <= sec * 6) {
+      if (avg < 128) {
+        R = 0.8 * avg;
+        G = 0;
+        B = 2 * avg;
+      } else {
+        R = 1.2 * avg - 51;
+        G = 2 * avg - 255;
+        B = 255;
+      }
+    } else if (y <= sec * 7) {
+      if (avg < 128) {
+        R = 1.6 * avg;
+        G = 0;
+        B = 1.6 * avg;
+      } else {
+        R = 10.4 * avg - 153;
+        G = 2 * avg - 255;
+        B = 0.4 * avg + 153;
+      }
+    }
+    SET();
+  }
+  var imagecanvas = document.getElementById("d1");
+  image.drawTo(imagecanvas);
+}
+
+function SET() {
+  pixel.setRed(R);
+  pixel.setGreen(G);
+  pixel.setBlue(B);
+}
+</script>
+<body>
+
+<canvas id="d1"></canvas>
+<input type="file" 
+       multiple="false"
+       accept="image/*"
+       id="finput"
+       onchange="Upload()">
+       
+<input type="button" 
+       value="Rainbow";
+      onclick="Rainbow()">
+</body>
+
+
+</html>
